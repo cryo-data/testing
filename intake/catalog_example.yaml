@@ -1,0 +1,41 @@
+metadata:
+  version: 1
+  parameters:
+    file_name:
+      type: str
+      description: default file name for child entries
+      default: example_file_name
+sources:
+  example:
+    description: test
+    driver: random
+    args: {}
+
+  entry1_full:
+    description: entry1 full
+    metadata:
+      foo: 'bar'
+      bar: [1, 2, 3]
+    driver: csv
+    args: # passed to the open() method
+      urlpath: '{{ CATALOG_DIR }}/entry1_*.csv'
+
+  entry1_part:
+    description: entry1 part
+    parameters: # User parameters
+      part:
+        description: section of the data
+        type: str
+        default: "stable"
+        allowed: ["latest", "stable"]
+    driver: csv
+    args:
+      urlpath: '{{ CATALOG_DIR }}/entry1_{{ part }}.csv'
+
+  entry2:
+    description: entry2
+    driver: csv
+    args:
+      # file_name parameter will be inherited from file-level parameters, so will
+      # default to "example_file_name"
+      urlpath: '{{ CATALOG_DIR }}/entry2/{{ file_name }}.csv`
