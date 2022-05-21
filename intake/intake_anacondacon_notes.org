@@ -1,0 +1,50 @@
+* [[https://www.youtube.com/watch?v=oyZJrROQzUs&list=WL&index=4&ab_channel=Anaconda%252CInc.][Intake: Taking the Pain Out of Data Access (AnacondaCON)]]
+
+MARTIN DURANT | SOFTWARE ENGINEER AT ANACONDA
+
+** Intro
+Common way of downloading data: get a request with website URL,
+filenames and credentials. But:
+
+*** Data User
+
+Do I really have to figure out this code (download) every time?  
+
+Wait, is it the right data-set anyway?
+
+*** Data provider
+
+You shouldn't be using that old version, there's been an update
+
+The new version is in avro, stored on Azure, you'll have to change the
+code
+
+*** IT
+
+You should NEVER include credentials in notebooks
+
+*** Dev
+
+Pandas doesn't have a reader for avro.
+
+
+** As simple as it gets on the user side
+
+#+begin_src python
+
+import intake
+cat = intake.open_catalog("afile.yaml")
+df = cat.useful_data.read()
+
+#+end_src
+
+** Benefits
+
+- avoid download code copy & paste
+- "install data" -> `conda install data-us_states -c intake` then
+  `intake.cat.states.read()`
+- cloud access (GCS, S3, azure...)
+- big data (dask, datashader, spark, SQL...) -> `to_dask()` method
+- GUI (Jupyter)
+- Fill credentials from environment
+
