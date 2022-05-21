@@ -1,0 +1,12 @@
+metadata:
+  version: 1
+sources:
+  
+  states:
+    description: US state information from [CivilServices](https://civil.services/)
+    driver: csv
+    args:
+      urlpath: 'simplecache::https://github.com/CivilServiceUSA/us-states/blob/v1.0.0/data/states.csv'
+      storage_options:
+        simplecache:
+          cache_storage: '{{ CATALOG_DIR }}/civilservices/states.csv'

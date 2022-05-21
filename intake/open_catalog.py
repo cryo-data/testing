@@ -8,7 +8,7 @@
 
 from intake import open_catalog
 
-cat = open_catalog("/home/adrien/UZH/cryo-data/testing/intake/catalog_example2.yaml")
+cat = open_catalog("/home/adrien/UZH/cryo-data/testing/intake/catalog_example3.yaml")
 
 list(cat)
 
